@@ -6,14 +6,22 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
 
+
+type Interview = {
+    id: string;
+    candidate_name?: string;
+    recruiter_name?: string;
+    title?: string;
+};
 interface InterviewContextProps {
     interviewId: string;
     setInterviewId: (id: string) => void;
-    interviewData: null;
+    interviewData: Interview;
     loadInterviewContext: () => void;
     loading: boolean;
     error: string;
 }
+
 
 export const InterviewContext: React.FC<InterviewContextProps> = ({
     interviewId,
@@ -44,7 +52,7 @@ export const InterviewContext: React.FC<InterviewContextProps> = ({
     return (
         <Card title="Interview Context">
             <div className="space-y-2">
-                <Text><strong>Interview ID:</strong> {interviewData.interview_id}</Text>
+                <Text><strong>Interview ID:</strong> {interviewData.id}</Text>
                 <Text><strong>Candidate:</strong> {interviewData.candidate_name}</Text>
                 <Text><strong>Recruiter:</strong> {interviewData.recruiter_name}</Text>
                 <Text><strong>Title:</strong> {interviewData.title}</Text>

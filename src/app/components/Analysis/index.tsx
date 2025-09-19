@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
 import React, { useState, useEffect, useRef } from 'react';
 
+
 interface AnalysisSectionProps {
     isAnalysisRunning: boolean;
     startAnalysis: () => void;

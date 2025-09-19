@@ -9,24 +9,21 @@ export const TranscriptionStatus: React.FC = () => {
     const [spaceId, setSpaceId] = useState<string>('');
 
     useEffect(() => {
-        // Check if we're in a Google Meet context
         if (window.parent !== window) {
-            // We're in an iframe, likely in Google Meet
             try {
-                // Try to get the meeting space ID from the URL
                 const urlParams = new URLSearchParams(window.location.search);
                 const space = urlParams.get('space');
                 if (space) {
                     setSpaceId(space);
-                    setTranscriptionStatus('✅ Live transcription is enabled');
+                    setTranscriptionStatus('Live transcription is enabled');
                 } else {
-                    setTranscriptionStatus('❌ No meeting space ID available');
+                    setTranscriptionStatus('No meeting space ID available');
                 }
             } catch (error) {
-                setTranscriptionStatus('❌ Unable to check transcription status');
+                setTranscriptionStatus(`Unable to check transcription status ${error}`);
             }
         } else {
-            setTranscriptionStatus('❌ Not running in Google Meet');
+            setTranscriptionStatus('Not running in Google Meet');
         }
     }, []);
 

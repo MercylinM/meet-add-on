@@ -24,24 +24,20 @@ export default function SidePanel() {
     const [sidePanelClient, setSidePanelClient] = useState<MeetSidePanelClient>();
     const [interviewId, setInterviewId] = useState<string>('');
     const [isAnalysisRunning, setIsAnalysisRunning] = useState<boolean>(false);
-    const [interviewData, setInterviewData] = useState<Interview | null>(null);
+    const [interviewData, setInterviewData] = useState<Interview>();
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const [isInMeet, setIsInMeet] = useState<boolean>(false);
 
-    // Check if we're running in Google Meet
     useEffect(() => {
-        // Check if we're in an iframe (which is how Meet loads add-ons)
         const inIframe = window.parent !== window;
 
-        // Check if the meet_sdk parameter is present in the URL
         const urlParams = new URLSearchParams(window.location.search);
         const hasMeetSdkParam = urlParams.has('meet_sdk');
 
         setIsInMeet(inIframe && hasMeetSdkParam);
     }, []);
 
-    // Launches the main stage when the main button is clicked.
     async function startActivity() {
         if (!sidePanelClient) {
             throw new Error('Side Panel is not yet initialized!');
@@ -55,7 +51,6 @@ export default function SidePanel() {
      * Prepares the add-on Side Panel Client.
      */
     useEffect(() => {
-        // Only initialize the Meet SDK if we're actually running in Meet
         if (!isInMeet) return;
 
         (async () => {
