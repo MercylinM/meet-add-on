@@ -1,6 +1,5 @@
 'use client';
 
-import { config } from '@/app/lib/config';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
@@ -20,7 +19,7 @@ export const AnalysisSection: React.FC<AnalysisSectionProps> = ({
     interviewId
 }) => {
     const [transcript, setTranscript] = useState<string>('');
-    const [analysisResults, setAnalysisResults] = useState<any>(null);
+    const [analysisResults, setAnalysisResults] = useState<null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -36,11 +35,11 @@ export const AnalysisSection: React.FC<AnalysisSectionProps> = ({
                 transcript_time: new Date().toISOString()
             };
 
-            const response = await fetch(`${config.RECOS_API_BASE}/recos/analysis/`, {
+            const response = await fetch(`${process.env.RECOS_API_BASE}/recos/analysis/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Token ${config.RECOS_API_TOKEN}`
+                    'Authorization': `Token ${process.env.RECOS_API_TOKEN}`
                 },
                 body: JSON.stringify(payload)
             });
@@ -61,9 +60,7 @@ export const AnalysisSection: React.FC<AnalysisSectionProps> = ({
 
     useEffect(() => {
         if (isAnalysisRunning) {
-            // Simulate receiving transcripts
             intervalRef.current = setInterval(() => {
-                // In a real implementation, this would come from the Meet API
                 const sampleTranscripts = [
                     "So, tell me about your experience with Python.",
                     "I've been working with Python for 3 years and Django for 2 years.",

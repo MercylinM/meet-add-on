@@ -9,7 +9,7 @@ import { Text } from '@/components/ui/text';
 interface InterviewContextProps {
     interviewId: string;
     setInterviewId: (id: string) => void;
-    interviewData: any;
+    interviewData: null;
     loadInterviewContext: () => void;
     loading: boolean;
     error: string;
@@ -44,10 +44,10 @@ export const InterviewContext: React.FC<InterviewContextProps> = ({
     return (
         <Card title="Interview Context">
             <div className="space-y-2">
-                <Text><strong>Interview ID:</strong> {interviewData.interview.interview_id}</Text>
-                <Text><strong>Candidate:</strong> {interviewData.interview.candidate_name}</Text>
-                <Text><strong>Recruiter:</strong> {interviewData.interview.recruiter_name}</Text>
-                <Text><strong>Title:</strong> {interviewData.interview.title}</Text>
+                <Text><strong>Interview ID:</strong> {interviewData.interview_id}</Text>
+                <Text><strong>Candidate:</strong> {interviewData.candidate_name}</Text>
+                <Text><strong>Recruiter:</strong> {interviewData.recruiter_name}</Text>
+                <Text><strong>Title:</strong> {interviewData.title}</Text>
                 <Button onClick={() => setInterviewData(null)}>Change Interview</Button>
             </div>
         </Card>
