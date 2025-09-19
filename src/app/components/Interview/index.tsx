@@ -16,7 +16,8 @@ type Interview = {
 interface InterviewContextProps {
     interviewId: string;
     setInterviewId: (id: string) => void;
-    interviewData: Interview;
+    interviewData: Interview | null;           
+    setInterviewData: (data: Interview | null) => void;  
     loadInterviewContext: () => void;
     loading: boolean;
     error: string;
@@ -27,6 +28,7 @@ export const InterviewContext: React.FC<InterviewContextProps> = ({
     interviewId,
     setInterviewId,
     interviewData,
+    setInterviewData,
     loadInterviewContext,
     loading,
     error

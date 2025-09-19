@@ -20,7 +20,7 @@ export const AnalysisSection: React.FC<AnalysisSectionProps> = ({
     interviewId
 }) => {
     const [transcript, setTranscript] = useState<string>('');
-    const [analysisResults, setAnalysisResults] = useState<null>(null);
+    const [analysisResults, setAnalysisResults] = useState<object | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -51,10 +51,11 @@ export const AnalysisSection: React.FC<AnalysisSectionProps> = ({
 
             const result = await response.json();
             setAnalysisResults(result);
-        } catch (error) {
+        }catch (error) {
             console.error('Error analyzing transcript:', error);
-            setAnalysisResults({ error: error.message });
-        } finally {
+            const errorMessage = error instanceof Error ? error.message : String(error);
+            setAnalysisResults({ error: errorMessage });
+        } finally{
             setLoading(false);
         }
     };

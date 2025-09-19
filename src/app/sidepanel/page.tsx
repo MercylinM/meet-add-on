@@ -24,7 +24,7 @@ export default function SidePanel() {
     const [sidePanelClient, setSidePanelClient] = useState<MeetSidePanelClient>();
     const [interviewId, setInterviewId] = useState<string>('');
     const [isAnalysisRunning, setIsAnalysisRunning] = useState<boolean>(false);
-    const [interviewData, setInterviewData] = useState<Interview>();
+    const [interviewData, setInterviewData] = useState<Interview | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const [isInMeet, setIsInMeet] = useState<boolean>(false);
@@ -186,7 +186,9 @@ export default function SidePanel() {
                 interviewData={interviewData}
                 loadInterviewContext={loadInterviewContext}
                 loading={loading}
-                error={error}
+                error={error} setInterviewData={function (data: { id: string; candidate_name?: string; recruiter_name?: string; title?: string; } | null): void {
+                    throw new Error('Function not implemented.');
+                } }            
             />
 
             <TranscriptionStatus />
